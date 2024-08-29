@@ -35,12 +35,12 @@ const start = async () => {
   app.use((req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {
-    // payload.logger.info("Next.js started!");
+    payload.logger.info("Next.js started!");
 
     app.listen(PORT, async () => {
-      // payload.logger.info(
-      //   `Next.js App URL: ${process.env.NEXT_PUBLIX_SERVER_URL}`
-      // );
+      payload.logger.info(
+        `Next.js App URL: ${process.env.NEXT_PUBLIX_SERVER_URL}`
+      );
     });
   });
 };
