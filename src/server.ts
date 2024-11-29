@@ -3,6 +3,7 @@ import { getPayloadClient } from "./get-payload";
 import { nextApp, nextHandler } from "./next-utils";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { appRouter } from "./trpc";
+import { inferAsyncReturnType } from "@trpc/server";
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -15,11 +16,16 @@ const createContext = ({
   res,
 });
 
+export type ExpressContext = inferAsyncReturnType<typeof createContext>;
+
 const start = async () => {
   const payload = await getPayloadClient({
     initOptions: {
       express: app,
-      onInit: async (cms) => {
+      onInit: async (cms: {
+        logger: { info: (arg0: string) => void };
+        getAdminURL: any;
+      }) => {
         cms.logger.info(`Admin URL ${cms.getAdminURL}`);
       },
     },
@@ -39,7 +45,7 @@ const start = async () => {
 
     app.listen(PORT, async () => {
       payload.logger.info(
-        `Next.js App URL: ${process.env.NEXT_PUBLIX_SERVER_URL}`
+        `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
       );
     });
   });
