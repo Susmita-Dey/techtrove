@@ -20,7 +20,7 @@ export const Orders: CollectionConfig = {
     description: "a summary of all your orders on TechTrove.",
   },
   access: {
-    read: yourOwn,
+    // read: yourOwn,
     create: ({ req }) => req.user.role === "admin",
     update: ({ req }) => req.user.role === "admin",
     delete: ({ req }) => req.user.role === "admin",
