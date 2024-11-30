@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import type SwiperType from "swiper";
+import { useEffect, useState } from "react";
+import { Pagination } from "swiper/modules";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ImageSliderProps {
   urls: string[];
@@ -38,7 +38,7 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
 
   return (
     <div className="group relative bg-zinc-100 aspect-square overflow-hidden rounded-xl">
-      <div className="absolute z-10 opacity-0 group-hover:opacity-100 transition">
+      <div className="absolute z-10 inset-0 opacity-0 group-hover:opacity-100 transition">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -49,9 +49,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
             "hover:bg-primary-300 text-primary-800 opacity-100":
               !slideConfig.isEnd,
           })}
-          aria-label="next-image"
+          aria-label="next image"
         >
-          <ChevronsRight className="h-4 w-4 text-zinc-700" />
+          <ChevronRight className="h-4 w-4 text-zinc-700" />
         </button>
         <button
           onClick={(e) => {
@@ -63,9 +63,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
             "hover:bg-primary-300 text-primary-800 opacity-100":
               !slideConfig.isBeginning,
           })}
-          aria-label="previous-image"
+          aria-label="previous image"
         >
-          <ChevronsLeft className="h-4 w-4 text-zinc-700" />
+          <ChevronLeft className="h-4 w-4 text-zinc-700" />
         </button>
       </div>
 
@@ -77,9 +77,9 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
         }}
         onSwiper={(swiper) => setSwiper(swiper)}
         spaceBetween={50}
-        slidesPerView={1}
         modules={[Pagination]}
-        className="w-full h-full"
+        slidesPerView={1}
+        className="h-full w-full"
       >
         {urls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">

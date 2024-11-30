@@ -27,7 +27,7 @@ export const Products: CollectionConfig = {
     {
       name: "description",
       label: "Product Details",
-      type: "richText",
+      type: "textarea",
     },
     {
       name: "price",
